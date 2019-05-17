@@ -198,6 +198,9 @@ public class RoaringBitmap implements Cloneable, Serializable, Iterable<Integer>
    * @return a new bitmap
    */
   public static RoaringBitmap addOffset(final RoaringBitmap x, int offset) {
+    if(offset < 0)  {
+          throw new IllegalArgumentException("Offset must be positive.");
+    }
     int container_offset = offset >>> 16;
     int in_container_offset = offset % (1<<16);
     if(in_container_offset == 0) {
